@@ -2,32 +2,26 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
-  const [token, setToken] = useState(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
 
-  // login function
-  const login = (newToken) => {
-    setToken(newToken);
-    localStorage.setItem("token", newToken);
+  const login = (userData) => {
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
   };
 
-  // logout function
   const logout = () => {
-    setToken(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
-// custom hook
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-// ✅ export AuthContext also (important)
-export { AuthContext };
+export const useAuth = () => useContext(AuthContext);

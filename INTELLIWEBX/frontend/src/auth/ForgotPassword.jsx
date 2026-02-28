@@ -1,31 +1,29 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function ForgotPassword() {
-  const navigate = useNavigate();
-
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow w-[380px]">
-        <h2 className="text-2xl font-bold text-center text-indigo-600">
-          Forgot Password
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-xl shadow-md w-96">
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Reset Password
         </h2>
 
         <input
           type="email"
           placeholder="Enter your email"
-          className="w-full border p-3 rounded-lg mt-5"
+          className="w-full mb-6 p-2 border rounded-lg"
         />
 
-        <button className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg">
-          Send OTP
+        <button className="w-full bg-indigo-600 text-white py-2 rounded-lg">
+          Send Reset Link
         </button>
 
-        <button
-          onClick={() => navigate("/")}
-          className="w-full mt-3 text-indigo-600"
-        >
-          Back to Login
-        </button>
+        <p className="mt-4 text-center text-sm">
+          Back to{" "}
+          <Link to="/" className="text-indigo-600">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );
